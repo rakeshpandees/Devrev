@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="style.css">
+    <meta name="description" content="Bootstrap.">  
+      
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css"></style>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script> 
+   
+</head>
+<body>
+    <br>
+    <div class="dataTables_wrapper">
+        <h1>LIST OF AVAILABLE BOOKS</h1>
+        <table id="myTable">
+          <thead>
+            <tr>
+              <th style="width:5%">Book Number</th>
+              <th style="width:25%">Title</th>
+              <th style="width:25%">Author
+                <select class="filter" onchange="filter_rows()">
+                    <option value="all"></option>
+                    <option value="Paul">Paul</option>
+                    <option value="Harish">Harish</option>
+                    <option value="Rakesh">Rakesh</option>
+                    <option value="Barani">Barani</option>
+                    <option value="Dirshan">Dirshan</option>
+                    <option value="Mohamed">Mohamed</option>                      
+                </select>
+            </th>
+              <th style="width:25%">Genre</th>
+              <th style="width:25%">Publish</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>IELTS</td>
+              <td>Paul</td>
+              <td>proficiency</td>
+              <td>11 July 1960</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>The Time</td>
+              <td>Harish</td>
+              <td>Fiction</td>
+              <td>06 June 2003</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>RD Sharma/td>
+              <td>Rakesh</td>
+              <td>Maths</td>
+              <td>07 Novemeber 2004</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>GRE</td>
+              <td>Paul</td>
+              <td>proficiency</td>
+              <td>10 October 2017</td>
+            </tr>
+            <tr>
+               <td>5</td>
+               <td>Dear Stranger</td>
+               <td>Rakesh</td>
+               <td>Poem</td>
+               <td>25 July 2022</td>
+            </tr>
+            <tr>
+              <td>6</td>
+              <td>Humankind</td>
+              <td>Harish</td>
+              <td>Non-Fiction</td>
+              <td>3 March 2011</td>
+            </tr>
+            <tr>
+              <td>7</td>
+              <td>Concepts of Physics</td>
+              <td>Paul</td>
+              <td>Physics</td>
+              <td>4 April 1992</td>
+            </tr>
+            <tr>
+              <td>8</td>
+              <td>Problems in Physics</td>
+              <td>Barani</td>
+              <td>Physics</td>
+              <td>02 January 1979</td>
+            </tr>
+            <tr>
+              <td>9</td>
+              <td>Indian Politics</td>
+              <td>Harish</td>
+              <td>Civics</td>
+              <td>10 July 2013</td>
+            </tr>
+            <tr>
+              <td>10</td>
+              <td>Human Geography</td>
+              <td>Dirshan</td>
+              <td>Geography</td>
+              <td>05 May 1969</td>
+            </tr>
+            <tr>
+              <td>11</td>
+              <td>Verbal Reasoning</td>
+              <td>Mohamed</td>
+              <td>Aptitude</td>
+              <td>30 May 2018</td>
+            </tr>
+            <tr>
+              <td>12</td>
+              <td>The Heart</td>
+              <td>Barani</td>
+              <td>Romance</td>
+              <td>20 February 2017</td>
+            </tr>
+            <tr>
+              <td>13</td>
+              <td>The girl</td>
+              <td>Harish</td>
+              <td>Non-Fiction</td>
+              <td>28 August 1947</td>
+            </tr>
+            <tr>
+              <td>14</td>
+              <td>Physical Education</td>
+              <td>Rakesh</td>
+              <td>Physical Education</td>
+              <td>19 December 2020</td>
+            </tr>
+            <tr>
+              <td>15</td>
+              <td>Question Bank Social Science</td>
+              <td>Mohamed</td>
+              <td>Social Science</td>
+              <td>01 May 2019</td>
+            </tr>
+            <tr>
+              <td>16</td>
+              <td>Cardiology</td>
+              <td>Barani</td>
+              <td>Biology</td>
+              <td>12 November 2014</td>
+            </tr>
+            <tr>
+              <td>17</td>
+              <td>Molecular Biology</td>
+              <td>Harish</td>
+              <td>Biology</td>
+              <td>21 March 1983</td>
+            </tr>
+            <tr>
+              <td>18</td>
+              <td>Harry Potter</td>
+              <td>Rakesh</td>
+              <td>Fiction</td>
+              <td>26 June 1997</td>
+            </tr>
+            <tr>
+              <td>19</td>
+              <td>Mask man</td>
+              <td>Harish</td>
+              <td>Fiction</td>
+              <td>2 July 1998</td>
+            </tr>
+            <tr>
+              <td>20</td>
+              <td>The Wizard</td>
+              <td>Barani</td>
+              <td>Fiction</td>
+              <td>8 July 1999</td>
+            </tr>
+            <tr>
+                <td>21</td>
+                <td>Invisible man</td>
+                <td>Harish</td>
+                <td>Fiction</td>
+                <td>8 July 2000</td>
+              </tr>
+          </tbody>
+        </table>
+        
+      
+      </div>
+   
+ <script>
+    $(document).ready( function () {
+      $('#myTable').DataTable({
+    "ordering": false,
+    "scrollY": "400px",
+    "scrollX":  true,
+    "scrollCollapse": true,
+    responsive: true,
+    
+});       
+} );
+
+</script>  
+<script src="script.js">
+</script>
+
+
+</body>
+</html>

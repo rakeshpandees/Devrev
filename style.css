@@ -1,0 +1,23 @@
+  #myTable {
+    border-collapse: collapse; 
+    width: 90vw; 
+    border: 1px solid rgb(255, 0, 0); 
+    font-size: 18px; 
+
+  }
+  
+  Table.dataTable thead tr {
+    background-color: rgb(0, 255, 0);
+  }
+  #myTable th, #myTable td {
+    text-align: center; 
+    padding: 15px;
+  }
+  
+  #myTable tr {
+    border-bottom: 1px solid rgb(255, 0, 0);
+  }
+  
+  /* #myTable tr.header, #myTable tr:hover {
+    background-color: #d2cdcd;
+  } */
