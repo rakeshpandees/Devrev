@@ -2,12 +2,15 @@
 <html>
 <head>
     <link rel="stylesheet" href="style.css">
-    <meta name="description" content="Bootstrap.">  
-      
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css"></style>
+    <script src="/jquery.min.js"></script>  
+    <script src="/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="/jquery.dataTables.min.css"></style>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script> -->
+    <!-- <link rel="stylesheet" href="https://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css"></style> -->
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script> 
-   
+    <!-- <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script> -->
+	<script type="text/javascript" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
+	</script>
 </head>
 <body>
     <br>
@@ -16,10 +19,10 @@
         <table id="myTable">
           <thead>
             <tr>
-              <th style="width:5%">Book Number</th>
-              <th style="width:25%">Title</th>
-              <th style="width:25%">Author
-                <select class="filter" onchange="filter_rows()">
+              <th id="id" style="width:5%">BOOK NUMBER</th>
+              <th id="title" style="width:25%">TITLE</th>
+              <th id="author" style="width:25%">AUTHOR
+                <!-- <select class="filter" onchange="filter_rows()">
                     <option value="all"></option>
                     <option value="Paul">Paul</option>
                     <option value="Harish">Harish</option>
@@ -27,10 +30,10 @@
                     <option value="Barani">Barani</option>
                     <option value="Dirshan">Dirshan</option>
                     <option value="Mohamed">Mohamed</option>                      
-                </select>
+                  </select> -->
             </th>
-              <th style="width:25%">Genre</th>
-              <th style="width:25%">Publish</th>
+              <th id="sub" style="width:25%">GENRE</th>
+              <th id="publishdate" style="width:25%">PUBLISH DATE</th>
             </tr>
           </thead>
           <tbody>
@@ -50,7 +53,7 @@
             </tr>
             <tr>
               <td>3</td>
-              <td>RD Sharma/td>
+              <td>RD Sharma</td>
               <td>Rakesh</td>
               <td>Maths</td>
               <td>07 Novemeber 2004</td>
@@ -165,7 +168,7 @@
               <td>Mask man</td>
               <td>Harish</td>
               <td>Fiction</td>
-              <td>2 July 1998</td>
+              <td>2 February 1998</td>
             </tr>
             <tr>
               <td>20</td>
@@ -179,29 +182,134 @@
                 <td>Invisible man</td>
                 <td>Harish</td>
                 <td>Fiction</td>
-                <td>8 July 2000</td>
+                <td>8 July 2010</td>
               </tr>
+              <tr>
+                <td>22</td>
+                <td>The Goblin</td>
+                <td>Rakesh</td>
+                <td>Fiction</td>
+                <td>8 May 2000</td>
+              </tr>
+              <tr>
+                <td>23</td>
+                <td>Marvel</td>
+                <td>Paul</td>
+                <td>Fiction</td>
+                <td>8 July 2009</td>
+              </tr>
+              <tr>
+                <td><input type="text" name="Book Number" /></td>
+                <td><input type="text" name="Title" /></td> 
+                <td><input type="text" name="Author" /></td>
+                <td><input type="text" name="Type" /></td> 
+                <td><input type="text" name="Publish" /></td>          
+              </tr>
+              <tfoot>
+                <tr>
+                  <th>Book Number
+                  </th>
+                  <th>Title
+                  </th>
+                  <th>Author
+                  </th>
+                  <th>Subject
+                  </th>
+                  <th>Publish Date
+                  </th>
+                </tr>   
+              </tfoot>
+            </table>
           </tbody>
         </table>
-        
-      
+        <input type="submit" class="button" value="Add_Book" onclick="addbook(this);" />
+        <button type="button">Add_Book</button>
       </div>
    
  <script>
     $(document).ready( function () {
       $('#myTable').DataTable({
     "ordering": false,
-    "scrollY": "400px",
+    "scrollY": "380px",
     "scrollX":  true,
     "scrollCollapse": true,
     responsive: true,
-    
+    initComplete: function () {
+      this.api().columns().every( function () {
+          var column = this;
+          var select = $('<select  class="browser-default custom-select form-control-sm"><option value="" selected>Search</option></select>')
+              .appendTo( $(column.footer()).empty() )
+              .on( 'change', function () {
+                  var val = $.fn.dataTable.util.escapeRegex(
+                      $(this).val()
+                  );
+
+                  column
+                      .search( val ? '^'+val+'$' : '', true, false )
+                      .draw();
+              } );
+
+          column.data().unique().sort().each( function ( d, j ) {
+              select.append( '<option value="'+d+'">'+d+'</option>' )
+          } );
+      } );
+  }
 });       
 } );
 
 </script>  
+
 <script src="script.js">
 </script>
+<!-- <script>
+  function filter_rows() {
+    allFilters = document.querySelectorAll(".filter")
+    var filter_value_dict = {}
+
+    allFilters.forEach((filter_i) => {
+        col_index = filter_i.parentElement.getAttribute('col-index')
+
+        value = filter_i.value
+        if (value != "all") {
+            filter_value_dict[col_index] = value;
+        }
+    });
+
+    var col_cell_value_dict = {};
+
+    const rows = document.querySelectorAll("#myTable tbody tr");
+    rows.forEach((row) => {
+        var display_row = true;
+
+        allFilters.forEach((filter_i) => {
+            col_index = filter_i.parentElement.getAttribute('col-index')
+            col_cell_value_dict[col_index] = row.querySelector("td:nth-child(" + col_index+ ")").innerHTML
+        })
+
+        for (var col_i in filter_value_dict) {
+            filter_value = filter_value_dict[col_i]
+            row_cell_value = col_cell_value_dict[col_i]
+            
+            if (row_cell_value.indexOf(filter_value) == -1 && filter_value != "all") {
+                display_row = false;
+                break;
+            }
+
+
+        }
+
+        if (display_row == true) {
+            row.style.display = "table-row"
+
+        } else {
+            row.style.display = "none"
+
+        }
+    })
+
+}
+
+</script> -->
 
 
 </body>

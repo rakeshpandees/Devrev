@@ -1,23 +1,48 @@
-  #myTable {
-    border-collapse: collapse; 
-    width: 90vw; 
-    border: 1px solid rgb(255, 0, 0); 
+  /* #myTable {
+    border-collapse: collapse;
+    width: 90vw;  
+    border-collapse: collapse;
+    border-top: 2px;
+    border: 2px solid rgb(0, 0, 0);  
     font-size: 18px; 
 
+  } */
+  table.dataTable thead th{
+    border: 2px solid black;
+    width: 5px;
   }
-  
   Table.dataTable thead tr {
-    background-color: rgb(0, 255, 0);
+    background-color: rgb(218, 242, 120);
+    /* background-blend-mode: color-dodge; */
+    /* border: 2px solid black; */
+    text-align: center;
   }
-  #myTable th, #myTable td {
+  Table.dataTable tfoot th {
+    background-color: rgb(218, 242, 120);
+    border: 2px solid black;
+    text-align: center;
+
+
+    /* border: 2px solid black; */
+  }
+  Table.dataTable tfoot tr {
+    background-color: rgb(218, 242, 120);
+  }
+  #myTable td {
     text-align: center; 
-    padding: 15px;
+    border: 2px solid black;
+    padding: 3px;
+    margin-left: -7.6px;
   }
   
   #myTable tr {
-    border-bottom: 1px solid rgb(255, 0, 0);
+    border-bottom: 1px solid rgb(0, 0, 0);
+    padding-left: 100px;
+    
   }
-  
+  thead {
+    margin-left: 50px !important;
+  }
   /* #myTable tr.header, #myTable tr:hover {
     background-color: #d2cdcd;
   } */

@@ -61,7 +61,7 @@ function filter_rows() {
         } else {
             row.style.display = "none"
 
-        }
-    })
+        }
+    })
 
 }
